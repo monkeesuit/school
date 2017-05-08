@@ -1,0 +1,31 @@
+DATABASE = ImageUpload
+
++-----------------------+
+| Tables_in_imageupload |
++-----------------------+
+| uploads               |
+| user                  |
++-----------------------+
+
+user = 
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| user_id       | bigint(20)  | NO   | PRI | NULL    | auto_increment |
+| user_name     | varchar(45) | YES  |     | NULL    |                |
+| user_email    | varchar(45) | YES  |     | NULL    |                |
+| user_username | varchar(45) | YES  |     | NULL    |                |
+| user_password | varchar(45) | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+
+uploads =
++----------------+---------------+------+-----+---------+----------------+
+| Field          | Type          | Null | Key | Default | Extra          |
++----------------+---------------+------+-----+---------+----------------+
+| upload_id      | int(11)       | NO   | PRI | NULL    | auto_increment |
+| upload_userid  | int(11)       | YES  |     | NULL    |                |
+| upload_date    | datetime      | YES  |     | NULL    |                |
+| upload_name    | varchar(45)   | YES  |     | NULL    |                |
+| upload_path    | varchar(500)  | YES  |     | NULL    |                |
+| upload_caption | varchar(5000) | YES  |     | NULL    |                |
++----------------+---------------+------+-----+---------+----------------+

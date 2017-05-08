@@ -1,0 +1,21 @@
+# Open a file
+myfile = openfile("private_testfile.txt", True)
+myfile.filename = "broken.txt"
+
+# Put some data in the file
+myfile.writeat("PER", 0)
+myfile.writeat("PER", 0)
+
+myfile.writeat("INV", 0)
+
+#Close the file
+myfile.close()
+
+try:
+	removefile("private_testfile.txt")
+except RepyArgumentError:
+	log("ERROR! I Should Be Allowed to Delete This File\n")
+else:
+	pass
+
+

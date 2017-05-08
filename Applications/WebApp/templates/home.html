@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>Image Upload</title>
+  
+  <script src="static/js/jquery-3.1.1.js"></script>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+  
+  <script id="addelement" type="text/x-jQuery-tmpl">
+    <li><img src="${Path}" style="width: 140px; height: 140px;" /><br/><p style="color:white">${Caption}</p></li>
+  </script>
+  
+  <script src="static/js/getAllPhotos.js"></script>
+  <script> GetAllPhotos(1);</script>
+  
+  <link rel="stylesheet" href="static/css/style.css"></script>
+  
+  <meta charset="UTF-8">
+  <meta name="author" content="Sam Mishra">
+  <meta name="description" content="Upload Images">
+  
+</head>
+
+<body>
+  
+  <ul>
+    <li><a href="/">Image Upload</a></li>
+    <li style="float:right"><a href="/LogOut">Log Out</a></li>
+    <li style="float:right"><a href="/LogInPage">Log In</a></li>
+    <li style="float:right"><a href="/SignUpPage">Sign Up</a></li>
+    <li style="float:right"><a href="/UserHomePage">Home</a></li>
+    <li style="float:right"><a href="/UploadPage">Upload</a></li>
+    <li style="float:right"><a href="/EditPage">Edit</a></li>
+  </ul>
+
+  <br/>
+  
+  <ul id="posts">
+  </ul>
+  </br>
+  <ul id="pagination">
+  </ul>
+  </br>
+  
+  <input type="hidden" id="start" value="1" />
+  <input type="hidden" id="end" value="5" />
+  
+  <footer>Copyright &copy; Samuel A. Mishra</footer>
+</body>
+</html>

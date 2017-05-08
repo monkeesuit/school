@@ -1,0 +1,16 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_GetUserPhotos`;
+ 
+DELIMITER //
+CREATE PROCEDURE `procedure_GetUserPhotos` (
+IN input_userid bigint,
+IN input_limit int,
+IN input_offset int,
+out output_total bigint
+)
+BEGIN
+select count(*) into output_total from uploads where upload_userid = input_userid;
+select * from uploads where upload_userid = input_userid order by upload_date desc limit input_limit offset input_offset;
+END//
+ 
+DELIMITER ;

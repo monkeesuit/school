@@ -1,0 +1,13 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_Delete`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedure_Delete`(
+IN input_userid int(10),
+IN input_name VARCHAR(40)
+)
+BEGIN
+delete from uploads where upload_userid = input_userid and upload_name = input_name;
+END//
+
+DELIMITER ;

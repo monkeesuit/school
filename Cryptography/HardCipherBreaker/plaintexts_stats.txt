@@ -1,0 +1,42 @@
+a: 0.0652
+b: 0.0152
+c: 0.038
+d: 0.038
+e: 0.1036
+f: 0.0128
+g: 0.0296
+h: 0.0216
+i: 0.0764
+j: 0.0036
+k: 0.004
+l: 0.0532
+m: 0.0296
+n: 0.0576
+o: 0.0612
+p: 0.0264
+q: 0.0008
+r: 0.066
+s: 0.0776
+t: 0.052
+u: 0.0272
+v: 0.0068
+w: 0.0032
+x: 0.0028
+y: 0.0156
+z: 0.0056
+ : 0.1064
+
+Words: 266
+
+Pair: an 	Freq: 1.11
+Pair: er 	Freq: 1.91
+Pair: es 	Freq: 1.91
+Pair: e  	Freq: 1.35
+Pair: in 	Freq: 1.43
+Pair: on 	Freq: 1.47
+Pair: re 	Freq: 1.75
+Pair: s  	Freq: 3.58
+Pair: ti 	Freq: 1.19
+Pair:  c 	Freq: 1.43
+Pair:  p 	Freq: 1.07
+Pair:  r 	Freq: 1.03

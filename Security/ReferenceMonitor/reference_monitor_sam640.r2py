@@ -1,0 +1,156 @@
+lock = createlock()
+
+INVBUFFER = []
+PERBUFFER = []
+
+init = listfiles()
+for filename in init:
+	if filename.startswith("private_"):
+		file = openfile(filename, False)
+
+		contents = file.readat(None,0)
+		contents = contents.strip()
+		contents = contents.strip('\b')
+
+		if len(contents) >= 3:
+
+			if contents[0] == "I":
+				if contents[1] == "N":
+					if contents[2] == "V":
+
+						if filename not in INVBUFFER:
+							INVBUFFER.append(filename)
+
+						# remove the file from the PERBUFFER if it exists
+						try:
+							PERBUFFER.remove(filename)
+						except ValueError:
+							pass
+
+
+			if contents[0] == "P":
+				if contents[1] == "E":
+					if contents[2] == "R":
+
+						if filename not in PERBUFFER:
+							PERBUFFER.append(filename)
+
+						# remove the file from the INVBUFFER if it exists
+						try:
+							INVBUFFER.remove(filename)
+						except ValueError:
+							pass
+
+		file.close()
+
+
+
+class SecureFile():
+	def __init__(self, file, filename):
+		self.file = file
+		self.filename = filename
+
+	def readat(self, sizelimit, offset):
+		return self.file.readat(sizelimit, offset)
+
+	def writeat(self, data, offset):
+
+		lock.acquire(True)
+
+		self.file.writeat(data, offset)
+
+		if self.filename.startswith("private_"):
+			contents = self.file.readat(None,0)
+			contents = contents.strip()
+			contents = contents.strip('\b')
+
+			if len(contents) >= 3:
+
+				if contents[0] == "I":
+					if contents[1] == "N":
+						if contents[2] == "V":
+
+							if self.filename not in INVBUFFER:
+								INVBUFFER.append(self.filename)
+
+							# remove the file from the PERBUFFER if it exists
+							try:
+								PERBUFFER.remove(self.filename)
+							except ValueError:
+								pass
+
+				if contents[0] == "P":
+					if contents[1] == "E":
+						if contents[2] == "R":
+
+							if self.filename not in PERBUFFER:
+									PERBUFFER.append(self.filename)
+
+							# remove the file from the INVBUFFER if it exists
+							try:
+								INVBUFFER.remove(self.filename)
+							except ValueError:
+								pass
+
+
+		lock.release()
+
+
+	def close(self):
+		return self.file.close()
+
+
+def secure_openfile(filename, create):
+	file = openfile(filename, create)
+	return SecureFile(file, filename)
+
+
+def secure_removefile(filename):
+	if filename in PERBUFFER:
+		raise RepyArgumentError("Cannot delete this file!\n")
+	removefile(filename)
+
+
+def secure_listfiles():
+	filelist = listfiles()
+	returnlist = []
+	for filename in filelist:
+		if filename in INVBUFFER:
+			continue
+		returnlist.append(filename)
+	return returnlist
+
+
+# The code here sets up type checking and variable hiding for you. You should not need to change anything below here.
+sec_file_def = {
+	"obj-type":SecureFile,
+	"name":"SecureFile",
+	"readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
+	"writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(None),"target":SecureFile.writeat},
+	"close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
+	}
+
+CHILD_CONTEXT_DEF["openfile"] = {"type":"objc",
+	"args":(str,bool),
+	# any? why Exception in particular?
+	"exceptions":Exception,
+	"return":sec_file_def,
+	"target":secure_openfile
+	}
+
+CHILD_CONTEXT_DEF["listfiles"] = {"type":"func",
+	"args":None,
+	"return":list,
+	"exceptions":"any",
+	"target":secure_listfiles
+	}
+
+CHILD_CONTEXT_DEF["removefile"] = {"type":"func",
+	"args":(str,),
+	"return":None,
+	"exceptions":"any",
+	"target":secure_removefile
+	}
+
+# Execute the user code
+secure_dispatch_module()

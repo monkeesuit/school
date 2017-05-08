@@ -1,0 +1,26 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_SignUp`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedure_SignUp`(
+IN input_name VARCHAR(40),
+IN input_email VARCHAR(40),
+IN input_username VARCHAR(40),
+IN input_password VARCHAR(200))
+BEGIN
+if (select exists (select 1 from user where user_username = input_username)) THEN
+select 'That Username Is Already In Use';
+ELSE
+insert into user(
+user_name,
+user_email,
+user_username,
+user_password)
+values(
+input_name,
+input_email,
+input_username,
+input_password);
+END IF;
+END//
+DELIMITER ;

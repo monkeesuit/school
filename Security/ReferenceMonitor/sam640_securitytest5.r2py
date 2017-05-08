@@ -1,0 +1,23 @@
+if "private_testfile.txt" in listfiles():
+	try:
+		removefile("private_testfile.txt")
+	except RepyArgumentError:
+		pass # There should be an exception here!
+
+# Open a file
+myfile = openfile("private_testfile.txt", True)
+
+# Put some data in the file
+myfile.writeat("\bPER", 0)
+
+#Close the file
+myfile.close()
+
+try:
+	removefile("private_testfile.txt")
+except RepyArgumentError:
+	pass # There should be an exception here!
+else:
+	log("ERROR! Allowed me to delete the file.\n")
+
+

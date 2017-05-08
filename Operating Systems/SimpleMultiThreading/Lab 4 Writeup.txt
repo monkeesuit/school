@@ -1,0 +1,22 @@
+Part 1
+
+Before adding locks to the insert function there was a race condition in which threads could potentially overwrite the same portion of memory.  
+
+For example if you had 5 buckets and 10 threads then there will be two threads trying to write to each bucket.
+So a thread could be doing its work, enter the insert function, execute the entire e->next = table[i] line, and then the scheduler could switch to another thread.  
+At this point there is an empty entry in table[i].  
+Now when the next thread begins running it will overwrite the entry in the linked list when it runs the e->next = table[i] line, if it completes the insert function it will have created a complete entry. 
+But if the scheduler now runs the first thread again it will start running from the e->key = key line and therefore rewrite the two correct values.
+At this point we have lost one entry in the linked list and another entry has incorrect values.  
+
+This race condition can be solved by using a mutex lock on the critical section of code, which is the part of the insert function where the entry and its values are written into memory and the linked list is created.
+
+Part 2
+
+Retrieving an item does not require a lock because a barrier was created in which all the writing threads are to end before any more of the code is executed.  
+Since the read comes after the barrier there is no possibility for a piece of memory to be overwritten while being read.  
+Also each thread has a specific set of keys it is checking for, therefore there is no conflict between reading threads since there is no shared resource.
+
+Part 3
+
+Threads only write into the buckets they hash to.  This means that only certain threads that work on the same buckets have race conditions.  In other words only threads that hash to the same value share a resource.  So it is not a problem to have multiple threads writing into the table at one time but it is a problem to have multiple threads writing into one bucket at a time.  To solve this we need a lock for each bucket instead of one lock for the entire table.

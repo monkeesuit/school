@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  
+  <head>
+    <title>Image Upload</title>
+    
+    <script src="static/js/jquery-3.1.1.js"></script>
+    <script src="static/js/jquery.ui.widget.js"></script>
+    <script src="static/js/jquery.fileupload.js"></script>
+    <script src="static/js/jquery.fileupload-process.js"></script>
+    <script src="static/js/jquery.fileupload-ui.js"></script>
+    <script src="static/js/upload.js"></script>
+
+    <link rel="stylesheet" href="static/css/style.css"></script>
+
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Sam Mishra"/>
+    <meta name="description" content="Upload Images"/>
+    
+  </head>
+  
+  <body>
+    
+    <ul>
+      <li><a href="/">Image Upload</a></li>
+      <li style="float:right"><a href="/LogOut">Log Out</a></li>
+      <li style="float:right"><a href="/LogInPage">Log In</a></li>
+      <li style="float:right"><a href="/SignUpPage">Sign Up</a></li>
+      <li style="float:right"><a href="/UserHomePage">Home</a></li>
+      <li style="float:right"><a href="/UploadPage">Upload</a></li>
+      <li style="float:right"><a href="/EditPage">Edit</a></li>
+    </ul>
+    
+    <br/>
+    
+    <h1>Upload</h1>
+    
+    <form action="/Submit" method="post">
+      Filename:<br/>
+      <input id="filename" name="filename" type="text"/>
+      <br/>Caption:<br/>
+      <input id="caption" name="caption" type="text"/>
+      <br/>File:<br/>
+      <input type="file" id="file" name="file" multiple>
+      <img id="preview" style="width: 140px; height: 140px;" class="img-thumbnail">
+      <br/>
+      <input id="filepath" name="filepath" type="text"></input>
+      <br/>
+      <button id="buttonSubmit" type="submit">Submit</button>
+    
+    <footer>Copyright &copy; Samuel A. Mishra</footer>
+  </body>
+</html>
+    

@@ -1,0 +1,13 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_GetPhotoByName`;
+ 
+DELIMITER //
+CREATE PROCEDURE `procedure_GetPhotoByName` (
+IN input_name VARCHAR(40),
+IN input_userid int(10)
+)
+BEGIN
+    select * from uploads where upload_name = input_name and upload_userid=input_userid;
+END//
+ 
+DELIMITER ;

@@ -1,0 +1,19 @@
+# Open a file
+myfile = openfile("private_testfile.txt", True)
+
+# Put some data in the file
+myfile.writeat("P", 0)
+myfile.writeat("E", 1)
+myfile.writeat("R", 2)
+
+#Close the file
+myfile.close()
+
+try:
+	removefile("private_testfile.txt")
+except RepyArgumentError:
+	pass # There should be an exception here!
+else:
+	log("ERROR! Allowed me to delete the file.\n")
+
+

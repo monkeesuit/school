@@ -1,0 +1,11 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_LogIn`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedure_LogIn`(
+IN input_username VARCHAR(40)
+)
+BEGIN
+select * from user where user_username = input_username;
+END//
+DELIMITER ;

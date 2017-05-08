@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  
+  <head>
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="static/css/style.css"></script>
+
+    <script src="static/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="static/js/edit.js"></script>
+    
+    <script id="additem" type="text/x-jQuery-tmpl">
+      <li id="element-${htmlName}">
+      <a id="${htmlName}" onclick="Edit(this)">${Name}</a>
+      </li>
+    </script>
+    
+    <script id="addform" type="text/x-jQuery-tmpl">
+      <br/>
+      <br/>
+      <br/>
+      <form id="${Name}" action="/SubmitEdit" method="post">
+        <img src="${Path}" style='height: 150px; width: 150px; display: block;'/>
+        <br/>
+        <input type="hidden" name="name" id="name" value="${Name}" />
+        <input type="text" name="caption" id="caption" placeholder="${Caption}" />
+        <br/>
+        <button id="buttonDelete" type="submit" formaction="/SubmitDelete" formmethod="post">Delete</button>
+        <button id="buttonEditSubmit" type="submit">Edit</button>
+      </form>
+    </script>
+    
+    <script src="static/js/getEditPhotos.js"></script>
+    <script> GetEditPhotos(1); </script>
+
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Sam Mishra"/>
+    <meta name="description" content="Upload Images"/>
+
+  </head>
+  
+  <body>
+    
+    <ul>
+      <li><a href="/">Image Upload</a></li>
+      <li style="float:right"><a href="/LogOut">Log Out</a></li>
+      <li style="float:right"><a href="/LogInPage">Log In</a></li>
+      <li style="float:right"><a href="/SignUpPage">Sign Up</a></li>
+      <li style="float:right"><a href="/UserHomePage">Home</a></li>
+      <li style="float:right"><a href="/UploadPage">Upload</a></li>
+      <li style="float:right"><a href="/EditPage">Edit</a></li>
+    </ul>
+    
+    <br/>
+    
+    <ul id='uploads'>
+    </ul>
+    <br/>
+    <ul id="pagination">
+    </ul>
+    <br/>
+    
+    <input type="hidden" id="start" value="1" />
+    <input type="hidden" id="end" value="5" />
+    
+    <footer>Copyright &copy; Samuel A. Mishra</footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+if "private_testfile.txt" in listfiles():
+	try:
+		removefile("private_testfile.txt")
+	except RepyArgumentError:
+		pass # There should be an exception here!
+
+# Open a file
+myfile = openfile("private_testfile.txt", True)
+myfile.filename = "broken.txt"
+
+# Put some data in the file
+myfile.writeat("INV", 0)
+myfile.writeat("INV", 0)
+
+myfile.writeat("PER", 0)
+
+#Close the file
+myfile.close()
+
+if "private_testfile.txt" in listfiles():
+	pass
+else:
+	log("ERROR! Should Be Able To List File.\n")
+

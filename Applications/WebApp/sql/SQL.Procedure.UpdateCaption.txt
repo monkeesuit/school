@@ -1,0 +1,16 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_UpdateCaption`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedure_UpdateCaption`(
+IN input_userid int(10),
+IN input_name VARCHAR(40),
+IN input_caption VARCHAR(5000)
+)
+BEGIN
+update uploads set
+upload_caption = input_caption
+where upload_userid = input_userid and upload_name = input_name;
+
+END//
+DELIMITER ;

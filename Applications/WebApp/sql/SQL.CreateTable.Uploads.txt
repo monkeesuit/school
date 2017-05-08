@@ -1,0 +1,9 @@
+CREATE TABLE `uploads` (
+`upload_id` int(11) NOT NULL AUTO_INCREMENT,
+`upload_userid` int(11) DEFAULT NULL,
+`upload_date` datetime DEFAULT NULL,
+`upload_name` varchar(45) DEFAULT NULL,
+`upload_path` varchar(45)  NULL,
+`upload_caption` varchar(5000) DEFAULT NULL,
+PRIMARY KEY (`upload_id`)
+);

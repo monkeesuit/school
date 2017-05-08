@@ -1,0 +1,24 @@
+USE `ImageUpload`;
+DROP procedure IF EXISTS `procedure_Upload`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedure_Upload`(
+IN input_userid int(10),
+IN input_name VARCHAR(40),
+IN input_path VARCHAR(200),
+IN input_caption VARCHAR(5000))
+BEGIN
+insert into uploads(
+upload_userid,
+upload_date,
+upload_name,
+upload_path,
+upload_caption)
+values(
+input_userid,
+NOW(),
+input_name,
+input_path,
+input_caption);
+END//
+DELIMITER ;
