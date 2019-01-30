@@ -1,5 +1,5 @@
 //  Hello.c
-//  Sam Mishra - sam640@nyu.edu - N12140743
+//  Sam Mishra - sam640@nyu.edu
 //  A Hello World Program
 
 #include "types.h"
